@@ -3,9 +3,7 @@ import datetime
 import pytz
 import json
 
-from jinja2 import Environment
-from pylons import config
-from pylons.i18n import gettext
+from ckantoolkit import config, _
 
 from ckanapi import LocalCKAN, NotFound, NotAuthorized
 
@@ -50,9 +48,9 @@ def scheming_language_text(text, prefer_lang=None):
         l, v = sorted(text.items())[0]
         return v
 
-    t = gettext(text)
-    if isinstance(t, str):
-        return t.decode('utf-8')
+    if isinstance(text, str):
+        text = text.decode('utf-8')
+    t = _(text)
     return t
 
 
@@ -119,10 +117,8 @@ def scheming_datastore_choices(field):
     if not fields:
         fields = [f['id'] for f in result['fields'] if f['id'] != '_id']
 
-    return [{
-        'value': r[fields[0]],
-        'label': r[fields[1]]
-    } for r in result['records']]
+    return [{'value': r[fields[0]], 'label': r[fields[1]]}
+            for r in result['records']]
 
 
 def scheming_field_required(field):
@@ -248,7 +244,7 @@ def scheming_field_by_name(fields, name):
 
 
 def date_tz_str_to_datetime(date_str):
-    """Convert ISO-like formatted datestring with timezone to datetime object.
+    '''Convert ISO-like formatted datestring with timezone to datetime object.
 
     This function converts ISO format datetime-strings into datetime objects.
     Times may be specified down to the microsecond.  UTC offset or timezone
@@ -257,7 +253,7 @@ def date_tz_str_to_datetime(date_str):
     Note - Although originally documented as parsing ISO date(-times), this
            function doesn't fully adhere to the format.  It allows microsecond
            precision, despite that not being part of the ISO format.
-    """
+    '''
     split = date_str.split('T')
 
     if len(split) < 2:
@@ -301,8 +297,8 @@ def date_tz_str_to_datetime(date_str):
     return final_date
 
 
-def scheming_datetime_to_utc(date):
-    if date.tzinfo:
+def scheming_datetime_to_UTC(date):
+    if (date.tzinfo):
         date = date.astimezone(pytz.utc)
 
     # Make date naive before returning
@@ -318,11 +314,11 @@ def scheming_datetime_to_tz(date, tz):
 
 
 def scheming_get_timezones(field):
-    def to_options(l):
-        return [{'value': tz, 'text': tz} for tz in l]
+    def to_options(list):
+        return [{'value': tz, 'text': tz} for tz in list]
 
-    def validate_tz(l):
-        return [tz for tz in l if tz in pytz.all_timezones]
+    def validate_tz(list):
+        return [tz for tz in list if tz in pytz.all_timezones]
 
     timezones = field.get('timezones')
     if timezones == 'all':
@@ -338,7 +334,6 @@ def scheming_display_json_value(value, indent=2):
     Returns the object passed serialized as a JSON string.
 
     :param value: The object to serialize.
-    :param indent: Indentation level to pass through to json.dumps().
     :returns: The serialized object, or the original value if it could not be
         serialized.
     :rtype: string
@@ -347,46 +342,3 @@ def scheming_display_json_value(value, indent=2):
         return json.dumps(value, indent=indent, sort_keys=True)
     except (TypeError, ValueError):
         return value
-
-
-def scheming_render_from_string(source, **kwargs):
-    # Temporary solution for rendering defaults and including the CKAN
-    # helpers. The core CKAN lib does not include a string rendering
-    # utility that works across 2.6-2.8.
-    from ckantoolkit import h
-
-    env = Environment(autoescape=True)
-    template = env.from_string(
-        source,
-        globals={
-            'h': h
-        }
-    )
-
-    return template.render(**kwargs)
-
-
-def scheming_massage_subfield(field, subfield, index, data):
-    # Subfield & data are re-used, we must not modify the original!
-    sf = subfield.copy()
-    data = data.copy()
-
-    new_field_name = '{field_name}-{index}-{subfield_name}'.format(
-        field_name=field['field_name'],
-        index=index,
-        subfield_name=subfield['field_name']
-    )
-
-    field_data = data.pop(sf['field_name'], None)
-    if field_data is not None:
-        data[new_field_name] = field_data
-
-    sf['field_name'] = new_field_name
-
-    return sf, data
-
-def scheming_composite_load(value):
-    if value:
-        value = json.loads(value)
-        return [value] if isinstance(value, dict) else value
-    return []
