@@ -1,5 +1,7 @@
 {% extends 'package/new_package_form.html' %}
 
+{% resource 'scheming/group_accordian.js' %}
+
 {% block errors %}
   {%- if errors -%}
     {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
@@ -21,22 +23,35 @@
     </p>
   {%- endif -%}
 
-    {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
+    {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%} 
     {%- for group in schema.dataset_fields|groupby('display_group') -%}
          {%- if schema.display_groups is defined -%}
             {%- set current_group_label =  _(group.grouper) -%}
+<<<<<<< HEAD
             {%- set current_group_description = schema.display_groups[loop.index -1].description -%} 
             {%- set current_group_collapsible = schema.display_groups[loop.index -1].collapse_by_default -%} 
 
 	    {%- if current_group_collapsible is defined -%}
 		<button class="group-accordion"> {{ current_group_label }} </button>
 	    {%- else -%}
+=======
+            {%- set current_group_description = schema.display_groups[loop.index -1].description -%}
+            {%- set current_group_collapsible = schema.display_groups[loop.index -1].collapse_by_default -%}
+
+            {%- if current_group_collapsible is defined -%}
+                <button class="group-accordion"> {{ current_group_label }} </button>
+            {%- else -%}
+>>>>>>> 850e5aa054d38aedac66bde51e9284373fb709b2
                <h3 class="scheming-group-title">
                   {{ _(group.grouper) }}
                </h3>
             {%- endif -%}
             <p> {{ current_group_description }}
+<<<<<<< HEAD
         {%- endif -%} 
+=======
+        {%- endif -%}
+>>>>>>> 850e5aa054d38aedac66bde51e9284373fb709b2
         <div class="form-label-group">
         {%- for field in group.list -%}
             {%- if field.form_snippet is not none -%}
