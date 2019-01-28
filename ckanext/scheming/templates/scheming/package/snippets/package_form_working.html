@@ -10,10 +10,6 @@
 {% endblock %}
 
 {% block basic_fields %}
-
-  {% resource 'scheming/group_accordian.js' %}
-  {% resource 'scheming/group_accordian.css' %}
-
   {%- if not dataset_type -%}
     <p>
     dataset_type not passed to template. your version of CKAN
@@ -28,16 +24,12 @@
             {%- set current_group_description = schema.display_groups[loop.index -1].description -%} 
             {%- set current_group_collapsible = schema.display_groups[loop.index -1].collapse_by_default -%} 
 
-	    {%- if current_group_collapsible is defined -%}
-		<button class="group-accordion"> {{ current_group_label }} </button>
-	    {%- else -%}
-               <h3 class="scheming-group-title">
-                  {{ _(group.grouper) }}
-               </h3>
-            {%- endif -%}
+            <h3 class="scheming-group-title">
+                {{ _(group.grouper) }}
+            </h3>
             <p> {{ current_group_description }}
         {%- endif -%} 
-        <div class="form-label-group">
+        <div class="form-group control-medium">
         {%- for field in group.list -%}
             {%- if field.form_snippet is not none -%}
                 {%- if field.field_name not in data %}
