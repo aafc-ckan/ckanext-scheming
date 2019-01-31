@@ -20,28 +20,34 @@
     </p>
   {%- endif -%}
 
-    {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%} 
+    {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
     {%- for group in schema.dataset_fields|groupby('display_group') -%}
          {%- if schema.display_groups is defined -%}
             {%- set current_group_label =  _(group.grouper)|replace(' ','-') -%}
-            {%- set current_group_description = schema.display_groups[loop.index -1].description -%} 
-            {%- set current_group_collapsible = schema.display_groups[loop.index -1].collapse_by_default -%} 
-	    {%- if current_group_collapsible is defined -%}
-		<button class="group-accordion" data-toggle="collapse" data-target="#{{ current_group_label }}"> {{ _(group.grouper) }} </button>
-	        <h4>
-		       <p> {{ current_group_description }}
+            {%- set current_group_description = schema.display_groups[loop.index-1 ].description -%}
+            {%- set current_group_collapsible = schema.display_groups[loop.index-1 ].collapse_by_default -%}
+            {%- if current_group_collapsible is defined -%}
+                <div class="panel-group">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                     <h4 class="panel-title">
+                      <a data-toggle="collapse" href="#{{ current_group_label }}"> {{ _(group.grouper) }}
+
+<button class="group-accordion" data-toggle="collapse" data-target="#{{ current_group_label }}"> {{ _(group.grouper) }} </button>
+                <h4>
+                       <p> {{ current_group_description }}
                </h4>
                <div id="{{ current_group_label }}" class="collapse">
-	    {%- else -%}
+            {%- else -%}
                <h3 class="scheming-group-title">
                   {{ _(group.grouper) }}
                </h3>
                <h4>
-		       <p> {{ current_group_description }}
+                       <p> {{ current_group_description }}
                </h4>
-               <div class="form-label-group">	       
+               <div class="form-label-group">
             {%- endif -%}
-        {%- endif -%} 
+        {%- endif -%}
         {%- for field in group.list -%}
             {%- if field.form_snippet is not none -%}
                 {%- if field.field_name not in data %}
