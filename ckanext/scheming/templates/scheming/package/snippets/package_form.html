@@ -1,5 +1,7 @@
 {% extends 'package/new_package_form.html' %}
 
+{% resource 'scheming/group_accordian.css' %}
+
 {% block errors %}
   {%- if errors -%}
     {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
@@ -10,8 +12,6 @@
 {% endblock %}
 
 {% block basic_fields %}
-
-  {% resource 'scheming/group_accordian.css' %}
 
   {%- if not dataset_type -%}
     <p>
