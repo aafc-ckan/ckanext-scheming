@@ -30,13 +30,12 @@
                 <div class="panel-group">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                     <h4 class="panel-title">
-                      <a data-toggle="collapse" href="#{{ current_group_label }}"> {{ _(group.grouper) }}
-
-<button class="group-accordion" data-toggle="collapse" data-target="#{{ current_group_label }}"> {{ _(group.grouper) }} </button>
-                <h4>
+                     <h3 class="panel-title">
+                      <a data-toggle="collapse" href="#{{ current_group_label }}"> {{ _(group.grouper) }} </a>
+                     </h3>
+                     <h4>
                        <p> {{ current_group_description }}
-               </h4>
+                     </h4>
                <div id="{{ current_group_label }}" class="collapse">
             {%- else -%}
                <h3 class="scheming-group-title">
@@ -70,6 +69,10 @@
                 -%}
             {%- endif -%}
         {%- endfor -%}
+        {%- if current_group_collapsible is defined -%}
+             </div>
+           </div>
+        {%- endif -%}
         </div>
     {%- endfor -%}
 
