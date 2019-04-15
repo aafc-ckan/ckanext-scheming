@@ -36,14 +36,14 @@
                      <h4>
                        <p> {{ current_group_description }}
                      </h4>
-               <div id="{{ current_group_label }}" class="collapse">
+               <div id="{{ current_group_label }}" class="collapse {{ '' if current_group_collapsible else ' in'}}">
             {%- else -%}
-               <h3 class="scheming-group-title">
+              <!-- <h3 class="scheming-group-title">
                   {{ _(group.grouper) }}
                </h3>
                <h4>
                        <p> {{ current_group_description }}
-               </h4>
+               </h4> -->
                <div class="form-label-group">
             {%- endif -%}
         {%- endif -%}
