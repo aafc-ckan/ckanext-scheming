@@ -1,7 +1,12 @@
 /***
 place holder
 */
-function hello(){
-	console.log("Hello");
+function conditionalShow(){
+	var selected = $(this).val();
+	if(selected == "internal")
+          $("#group-Open-Government-Dataset-Release-Information").addClass("hidden");
+	else
+          $("#group-Open-Government-Dataset-Release-Information").removeClass("hidden");
+
 }
-$('#field-publication').change(hello);
+$('#field-publication').change(conditionalShow);
