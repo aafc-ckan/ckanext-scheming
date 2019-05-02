@@ -9,4 +9,7 @@ function conditionalShow(){
           $("#group-Open-Government-Dataset-Release-Information").removeClass("hidden");
 
 }
+$("#group-Open-Government-Dataset-Release-Information").addClass("hidden");
 $('#field-publication').change(conditionalShow);
+$('#ctrl-Optional-Dataset-Information').addClass("collapsed");
+$('#ctrl-Optional-Inventory-Information').addClass("collapsed");

@@ -32,8 +32,8 @@
                 <div class="panel-group">
                   <div class="panel panel-default" id="group-{{current_group_label}}">
                     <div class="panel-heading">
-                     <h3 class="panel-title">
-                      <a data-toggle="collapse" href="#{{ current_group_label }}"> {{ _(group.grouper) }} </a>
+                     <h3 class="panel-title" style="padding: 10px;background: #797979;color: white;">
+                      <a class="accordion-toggle"  data-toggle="collapse" href="#{{ current_group_label }}" id="ctrl-{{current_group_label}}"> {{ _(group.grouper) }} </a>
                      </h3>
                     <p></p>
                      <!-- <h4>
@@ -77,6 +77,13 @@
            </div>
         {%- endif -%}
         </div>
+	{%- if current_group_label != 'ANA' -%}
+	    {%- if current_group_label == 'Open-Government-Dataset-Release-Information' -%}
+	<div class="form-group hidden" id="gap-option">G:{{group.grouper}} &nbsp; lable: {{current_group_label}} </div>
+            {%- else -%}
+	<div class="form-group">&nbsp; </div>
+            {%- endif -%}
+        {%- endif -%}
     {%- endfor -%}
 
   {%- if 'resource_fields' not in schema -%}
