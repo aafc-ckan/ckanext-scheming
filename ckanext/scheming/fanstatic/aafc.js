@@ -24,7 +24,8 @@ function conditionalShow(){
           //$("#group-Open-Government-Dataset-Release-Information").addClass("hidden");
 	  switchToInternal();
 	else
-          $("#group-Open-Government-Dataset-Release-Information").removeClass("hidden");
+          //$("#group-Open-Government-Dataset-Release-Information").removeClass("hidden");
+	  switchToOpenGovernment();
 
 }
 //$("#group-Open-Government-Dataset-Release-Information").addClass("hidden");
