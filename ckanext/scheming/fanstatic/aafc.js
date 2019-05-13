@@ -9,6 +9,15 @@ function switchToInternal(){
         console.log("switched to internal");
 }
 
+function switchToOpenGovernment(){
+        $("#group-Open-Government-Dataset-Release-Information").removeClass("hidden");
+        $("input#field-jurisdiction").val("");
+        $("input#field-access_restriction").val("");
+        $("select#field-access_to_information") .val("");  
+        console.log("switched to open gov");
+}
+
+
 function conditionalShow(){
 	var selected = $(this).val();
 	if(selected == "internal")
@@ -18,7 +27,8 @@ function conditionalShow(){
           $("#group-Open-Government-Dataset-Release-Information").removeClass("hidden");
 
 }
-$("#group-Open-Government-Dataset-Release-Information").addClass("hidden");
+//$("#group-Open-Government-Dataset-Release-Information").addClass("hidden");
 $('#field-publication').change(conditionalShow);
 $('#ctrl-Optional-Dataset-Information').addClass("collapsed");
 $('#ctrl-Optional-Inventory-Information').addClass("collapsed");
+switchToInternal();
