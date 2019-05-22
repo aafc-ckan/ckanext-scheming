@@ -7,8 +7,9 @@ Version: 0.1
     font-family: 'Arial';
     /*content: "\e114";    /* adjust as needed, taken from bootstrap.css */
     content: "-";
-    float: right;        /* adjust as needed */
+    float: left;        /* adjust as needed */
     color: white;         /* adjust as needed */
+    margin-right: 5px;
 }
 .panel-heading .accordion-toggle.collapsed:after {
     /* symbol for "collapsed" panels */
