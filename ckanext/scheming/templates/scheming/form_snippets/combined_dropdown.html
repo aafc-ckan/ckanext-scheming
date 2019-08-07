@@ -1,0 +1,17 @@
+{# This is for displaying  multiple groups of data in a combined parent-children dropdown list in hidden div #}
+{%- set values = data[field.field_name] -%}
+{%- set labels = [] -%}
+<div id="mdropdown" class="hidden">
+{%- for choice in field.choices -%}
+	<div>{{choice.value}}
+	{%- set subchoices= choice.choices -%}
+        <ul class="mdpd" id="{{choice.value}}">
+	{%- for subc in subchoices -%}
+	   <li id="{{ subc.value  }}"> {{-h.scheming_language_text(subc.label) -}} </li>
+	{%- endfor  -%}
+	
+        </ul>
+	</div>
+{%- endfor -%}
+</div>
+
