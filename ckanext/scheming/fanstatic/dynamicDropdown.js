@@ -57,3 +57,14 @@ $("#field-program_alignment_architecture_to_drf_core_responsibilities").change(
     }
 );
 
+function buildChildrenDropdown( parent){
+        var children = paa2drfData[parent];
+        children.forEach ( function(item) {
+            var val = Object.keys(item)[0];
+            var label = item[val];
+            $("#field-drf_program_inventory").append(
+                $('<option></option>').val(val).html(label)
+            );
+        })
+}
+
