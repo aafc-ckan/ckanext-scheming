@@ -7,18 +7,6 @@ change the option of dropdown
 */
 
 
-var paa2drfData0 = 
-{
- "domestic_and_international_markets":
-	['Trade and Market Expansion','Sector Engagement and Development','Farm Products Council of Canada','Dairy Programs','Canadian Pari-Mutuel Agency','Water Infrastructure','Community Pastures','Federal, Provincial and Territorial Cost-shared Markets and Trade'],
- "science_and_innovation":
-	['Foundational Science and Research','AgriScience','AgriInnovate','Agricultural Greenhouse Gases Program','Canadian Agricultural Adaptation Program','Federal, Provincial and Territorial Cost-shared Science, Research, Innovation and Environment'],
- "sector_risk":
-	['AgriStability','AgriInsurance','AgriRisk','AgriInvest','AgriRecovery','Loan Guarantee Programs','Farm Debt Mediation Service','Pest Management','Assurance Program','Federal, Provincial and Territorial Cost-shared Assurance','Return of Payments'],
- "internal_services":
-	['Management and Oversight Services','Communication Services','Legal Services','Human Resource Management Services','Financial Management Services','Information Management Services','Information Technology Services','Real Property Services','Material Services','Acquisition Services']
-};
-
 var dic = {}
 $('ul.mdpd').each( 
     function(index) { 
@@ -30,7 +18,9 @@ $('ul.mdpd').each(
            var id = data.id;
            var label = data.innerText;
            //dic[parent].push({"value":id,"lable":label});
-           dic[parent].push({id:label});
+	   var newItem = {};
+	   newItem[id] = label;
+           dic[parent].push(newItem);
         });
     }
 
@@ -38,6 +28,19 @@ $('ul.mdpd').each(
 
 var paa2drfData = dic;
 
+//initialize the child dropdown based on current UI is new dataset or edit dataset
+var current = window.location.pathname;
+if (current.endsWith("new")){
+	$('#field-drf_program_inventory').empty();
+} else if (current.startsWith('/dataset/edit/')){
+	var savedParentValue= $('#field-program_alignment_architecture_to_drf_core_responsibilities').val()
+	var savedChildValue = $('#field-drf_program_inventory').val()
+	$('#field-drf_program_inventory').empty();
+	buildChildrenDropdown(savedParentValue);
+	$('#field-drf_program_inventory').val(savedChildValue)
+    console.log("Edit!:" + current );
+    console.log("Edit,saved child:" + savedChildValue + ",parent:"+ savedParentValue);
+}
 
 
 
