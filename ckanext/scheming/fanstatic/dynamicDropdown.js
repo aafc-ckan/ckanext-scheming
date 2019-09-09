@@ -6,7 +6,7 @@ change the option of dropdown
 
 */
 
-
+var igl_reasons=[];
 var dic = {}
 $('ul.mdpd').each( 
     function(index) { 
@@ -27,6 +27,21 @@ $('ul.mdpd').each(
  );
 
 var paa2drfData = dic;
+
+//build ineligilibity reasons
+$("select#field-ineligibility_reason option").each(
+	function(){
+		var val =  $(this).val();
+		var text = $(this).text();
+		if( val != '' && val != 'N/A')
+		{
+			item = {}
+			item[val] = text
+			igl_reasons.push(item);
+		}
+	}
+)
+
 
 //initialize the child dropdown based on current UI is new dataset or edit dataset
 var current = window.location.pathname;
@@ -62,4 +77,29 @@ function buildChildrenDropdown( parent){
             );
         })
 }
+
+
+//dynamically change the ineligibility reasons
+$("select#field-elegible_for_release").change(function(){
+    var currentSel = $(this).children("option:selected").val();
+    $("#field-ineligibility_reason").empty();
+    if (currentSel == "true"){
+      igl_reasons.forEach(
+        function(item){
+            var val = Object.keys(item)[0];
+            var label = item[val];
+            $("#field-ineligibility_reason").append(
+                $('<option></option>').val(val).html(label)
+            );
+        }
+       )
+    }
+    else{
+      $("#field-ineligibility_reason").append(
+                $('<option></option>').val("na").html("N/A")
+      );    	       
+    }
+    //console.log(currentSel);
+  }
+)
 
