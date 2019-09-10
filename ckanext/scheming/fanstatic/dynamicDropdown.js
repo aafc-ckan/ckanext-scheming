@@ -33,7 +33,7 @@ $("select#field-ineligibility_reason option").each(
 	function(){
 		var val =  $(this).val();
 		var text = $(this).text();
-		if( val != '' && val != 'N/A')
+		if( val != '' && val != 'na')
 		{
 			item = {}
 			item[val] = text
@@ -83,7 +83,7 @@ function buildChildrenDropdown( parent){
 $("select#field-elegible_for_release").change(function(){
     var currentSel = $(this).children("option:selected").val();
     $("#field-ineligibility_reason").empty();
-    if (currentSel == "true"){
+    if (currentSel == "false"){
       igl_reasons.forEach(
         function(item){
             var val = Object.keys(item)[0];
