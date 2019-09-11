@@ -32,7 +32,7 @@
       "datastore_choices_resource": "personality-choices",
       "datastore_choices_columns": {
         "value": "valcol",
-	"label": "labelcol"
+        "label": "labelcol"
       }
     }
   ],
