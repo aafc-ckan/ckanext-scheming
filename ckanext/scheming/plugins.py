@@ -3,6 +3,7 @@
 import os
 import inspect
 import logging
+from time import gmtime, strftime
 
 import yaml
 import ckan.plugins as p
@@ -27,7 +28,7 @@ from ckanext.scheming.converters import (
     convert_to_json_if_date,
     convert_to_json_if_datetime
 )
-
+import json
 
 ignore_missing = get_validator('ignore_missing')
 not_empty = get_validator('not_empty')
@@ -181,6 +182,7 @@ class _GroupOrganizationMixin(object):
         return navl_validate(data_dict, schema, context)
 
 
+
 class SchemingDatasetsPlugin(p.SingletonPlugin, DefaultDatasetForm,
                              _SchemingMixin):
     p.implements(p.IConfigurer)
@@ -212,7 +214,7 @@ class SchemingDatasetsPlugin(p.SingletonPlugin, DefaultDatasetForm,
     def package_types(self):
         return list(self._schemas)
 
-    def validate(self, context, data_dict, schema, action):
+    def validate_old(self, context, data_dict, schema, action):
         """
         Validate and convert for package_create, package_update and
         package_show actions.
@@ -259,7 +261,47 @@ class SchemingDatasetsPlugin(p.SingletonPlugin, DefaultDatasetForm,
                             )
                         )
 
+        #return navl_validate(data_dict, schema, context)
+        result = navl_validate(data_dict, schema, context)
+        output_file = "/tmp/plug_validating_ddict" + strftime("%Y-%m-%d_%H_%M_%S", gmtime()) + ".json"
+        with open(output_file,"w") as fout:
+            output_str = json.dumps(data_dict)
+            fout.write(output_str)	
+        return result
+
+    def validate(self, context, data_dict, schema, action):
+        """
+        Validate and convert for package_create, package_update and
+        package_show actions.
+        """
+        thing, action_type = action.split('_')
+        t = data_dict.get('type')
+        if not t or t not in self._schemas:
+            return data_dict, {'type': [
+                "Unsupported dataset type: {t}".format(t=t)]}
+        scheming_schema = self._expanded_schemas[t]
+
+        if action_type == 'show':
+            get_validators = _field_output_validators
+        elif action_type == 'create':
+            get_validators = _field_create_validators
+        else:
+            get_validators = _field_validators
+
+        for f in scheming_schema['dataset_fields']:
+            schema[f['field_name']] = get_validators(
+                f,
+                scheming_schema,
+                f['field_name'] not in schema
+            )
+
+        resource_schema = schema['resources']
+        for f in scheming_schema.get('resource_fields', []):
+            resource_schema[f['field_name']] = get_validators(
+                f, scheming_schema, False)
+
         return navl_validate(data_dict, schema, context)
+
 
     def get_actions(self):
         """

@@ -304,6 +304,14 @@ def scheming_datetime_to_UTC(date):
     # Make date naive before returning
     return date.replace(tzinfo=None)
 
+def scheming_datetime_to_utc(date):
+    if (date.tzinfo):
+        date = date.astimezone(pytz.utc)
+
+    # Make date naive before returning
+    return date.replace(tzinfo=None)
+
+
 
 def scheming_datetime_to_tz(date, tz):
     if isinstance(tz, basestring):

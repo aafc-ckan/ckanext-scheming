@@ -22,7 +22,6 @@
     might not be compatible with ckanext-scheming
     </p>
   {%- endif -%}
-
     {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
     {%- for group in schema.dataset_fields|groupby('display_group') -%}
          {%- if schema.display_groups is defined -%}

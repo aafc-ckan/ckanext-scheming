@@ -9,7 +9,7 @@
 {%- for c in h.scheming_field_choices(field) -%}
   {%- if not form_restrict_choices_to or c.value in form_restrict_choices_to -%}
     {%- do options.append({
-      'value': c.value,
+      'value': c.value|string,
       'text': h.scheming_language_text(c.label) }) -%}
   {%- endif -%}
 {%- endfor -%}
@@ -25,7 +25,7 @@
     selected=data[field.field_name],
     error=errors[field.field_name],
     classes=['control-medium'],
-    attrs=field.form_attrs if 'form_attrs' in field else {"class": "form-control"},
+    attrs=dict({"class": "form-control"}, **(field.get('form_attrs', {}))),
     is_required=h.scheming_field_required(field)
     )
 %}

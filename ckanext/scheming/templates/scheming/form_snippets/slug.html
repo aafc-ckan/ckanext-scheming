@@ -2,18 +2,16 @@
 
 {%- if entity_type == 'dataset' %}
     {%- set controller = 'package' -%}
-    {%- set module_placeholder = '<dataset>' -%}
 {%- elif entity_type == 'organization' %}
     {%- set controller = 'organization' -%}
-    {%- set module_placeholder = '<organization>' -%}
 {%- elif entity_type == 'group' -%}
     {%- set controller = 'group' -%}
-    {%- set module_placeholder = '<group>' -%}
 {%- endif -%}
 
-{%- set prefix = h.url_for(controller=controller, action='read', id='') -%}
-{%- set domain = h.url_for(controller=controller, action='read', id='',
-    qualified=true) -%}
+{%- set module_placeholder = '<' + object_type + '>' -%}
+
+{%- set prefix = h.url_for(object_type + '_read', id='') -%}
+{%- set domain = h.url_for(object_type + '_read', id='', qualified=true) -%}
 {%- set domain = domain|replace("http://", "")|replace("https://", "") -%}
 {%- set attrs = {
     'data-module': 'slug-preview-slug',
@@ -32,4 +30,4 @@
     is_required=h.scheming_field_required(field)
     ) }}
 
-{%- snippet 'scheming/form_snippets/help_text.html', field=field -%}
+

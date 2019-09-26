@@ -2,6 +2,7 @@ import json
 import datetime
 from collections import defaultdict
 import itertools
+import logging
 
 import pytz
 import ckan.lib.helpers as h
@@ -21,6 +22,7 @@ OneOf = get_validator('OneOf')
 ignore_missing = get_validator('ignore_missing')
 not_empty = get_validator('not_empty')
 
+log = logging.getLogger(__name__)
 
 def scheming_validator(fn):
     """
@@ -43,6 +45,7 @@ def composite_form(field, schema):
     def composite_validator(key, data, errors, context):
         # If the field is coming from the API the value will be set directly.
         value = data.get(key)
+        log.info("composite_validator called.key:" + key)
         if not value:
             # ... otherwise, it's a form submission so our values are stuck
             # unrolled in __extras.
