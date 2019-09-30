@@ -32,4 +32,9 @@ function conditionalShow(){
 $('#field-publication').change(conditionalShow);
 $('#ctrl-Optional-Dataset-Information').addClass("collapsed");
 $('#ctrl-Optional-Inventory-Information').addClass("collapsed");
-switchToInternal();
+
+var pub_type = $("#field-publication").val();
+if (pub_type == "open_government")
+   switchToOpenGovernment();
+else
+   switchToInternal();
