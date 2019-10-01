@@ -59,6 +59,7 @@
     'open_government_portal_record_f',
     'program_alignment_architecture_to_drf_core_responsibilities',
     'drf_program_inventory',
+    'hidden_drf_program_inventory',
     ] -%}
 
 {% block package_additional_info %}
@@ -66,7 +67,7 @@
     {% if field.field_name not in exclude_fields
         and field.display_snippet is not none %}
       <tr>
-        <th scope="row" class="dataset-label">{{
+        <th scope="row" class="dataset-label" id="f-{{field.field_name}}">{{
           h.scheming_language_text(field.label) }}</th>
         <td class="dataset-details"{%
           if field.display_property %} property="{{ field.display_property
@@ -77,7 +78,7 @@
   {%- endfor -%}
   {% if h.check_access('package_update',{'id':pkg_dict.id}) %}
     <tr>
-      <th scope="row" class="dataset-label">{{ _("State") }}</th>
+      <th scope="row" class="dataset-label">{{ _("State") }} </th>
       <td class="dataset-details">{{ _(pkg_dict.state) }}</td>
     </tr>
   {% endif %}
