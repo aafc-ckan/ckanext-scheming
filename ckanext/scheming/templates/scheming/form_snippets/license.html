@@ -9,11 +9,14 @@
 {%- if field.get('sorted_choices', true) -%}
     {%- set licenses = licenses|sort -%}
 {%- endif -%}
+{%- set form_restrict_choices_to=field.get('form_restrict_choices_to') -%}
 {%- for license_desc, license_id in licenses -%}
     {%- if license_id or not h.scheming_field_required(field) -%}
-        {%- do options.append({
-            'value': license_id,
-            'text': license_desc}) -%}
+       {%- if not form_restrict_choices_to or license_id in form_restrict_choices_to -%}
+           {%- do options.append({
+               'value': license_id,
+               'text': license_desc}) -%}
+       {%- endif -%}
     {%- endif -%}
 {%- endfor -%}
 
