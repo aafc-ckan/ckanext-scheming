@@ -5,7 +5,8 @@ function switchToInternal(){
         $("#group-Open-Data-Release-Criteria").addClass("hidden");
         $("input#field-jurisdiction").val("N/A");
         $("input#field-access_restriction").val("N/A");
-        $("select#field-access_to_information") .val("false");  
+        $("select#field-access_to_information").val("false");
+	$("select#field-license_id").val("aafc-dsa");
         console.log("switched to internal");
 }
 
@@ -13,7 +14,8 @@ function switchToOpenGovernment(){
         $("#group-Open-Data-Release-Criteria").removeClass("hidden");
         $("input#field-jurisdiction").val("");
         $("input#field-access_restriction").val("");
-        $("select#field-access_to_information") .val("");  
+        $("select#field-access_to_information").val("");
+	$("select#field-license_id").val("");
         console.log("switched to open gov");
 }
 
