@@ -15,7 +15,7 @@ function switchToInternal(){
         $("input#field-access_restriction").val("N/A");
         $("select#field-access_to_information").val("false");
 	$("select#field-license_id").val("aafc-dsa");
-	$("#field-date_published").val(getToday())
+	$("#field-date_published").val("1970-01-01");
         console.log("switched to internal");
 }
 
@@ -25,7 +25,7 @@ function switchToOpenGovernment(){
         $("input#field-access_restriction").val("");
         $("select#field-access_to_information").val("");
 	$("select#field-license_id").val("");
-	$("#field-date_published").val(getToday())
+	$("#field-date_published").val(getToday());
         console.log("switched to open gov");
 }
 
