@@ -16,6 +16,7 @@ function switchToInternal(){
         $("select#field-access_to_information").val("false");
 	$("select#field-license_id").val("aafc-dsa");
 	$("#field-date_published").val("1970-01-01");
+	$("#field-subject option[value='other']").prop("selected", true);
         console.log("switched to internal");
 }
 
