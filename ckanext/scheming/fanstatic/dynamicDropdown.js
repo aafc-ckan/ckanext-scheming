@@ -48,7 +48,7 @@ var current = window.location.pathname;
 if (current.endsWith("new")){
 	$('#field-drf_program_inventory').empty();
 } else if (current.startsWith('/dataset/edit/')){
-	var savedParentValue= $('#field-program_alignment_architecture_to_drf_core_responsibilities').val()
+	var savedParentValue= $('#field-drf_core_responsibilities').val()
 	var savedChildValue = $('#field-drf_program_inventory').val()
 	$('#field-drf_program_inventory').empty();
 	buildChildrenDropdown(savedParentValue);
@@ -59,7 +59,7 @@ if (current.endsWith("new")){
 
 
 
-$("#field-program_alignment_architecture_to_drf_core_responsibilities").change(
+$("#field-drf_core_responsibilities").change(
     function(){
         $("#field-drf_program_inventory").empty();
         var parent = $(this).children("option:selected").val();
