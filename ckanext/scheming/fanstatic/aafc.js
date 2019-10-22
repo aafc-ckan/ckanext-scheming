@@ -14,8 +14,8 @@ function switchToInternal(){
         $("input#field-jurisdiction").val("N/A");
         $("input#field-access_restriction").val("N/A");
         $("select#field-access_to_information").val("false");
-	$("select#field-license_id").val("aafc-dsa");
-	$("#field-date_published").val(getToday())
+		$("select#field-license_id").val("aafc-dsa");
+		$("#field-date_published").val(getToday())
         console.log("switched to internal");
 }
 
@@ -24,8 +24,9 @@ function switchToOpenGovernment(){
         $("input#field-jurisdiction").val("");
         $("input#field-access_restriction").val("");
         $("select#field-access_to_information").val("");
-	$("select#field-license_id").val("");
-	$("#field-date_published").val(getToday())
+		$("select#field-license_id").val("");
+		$("select#field-license_id option[value='aafc-dsa']").hide();
+		$("#field-date_published").val(getToday())
         console.log("switched to open gov");
 }
 
