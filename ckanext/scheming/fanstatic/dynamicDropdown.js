@@ -107,3 +107,15 @@ $("select#field-elegible_for_release").change(function(){
   }
 )
 
+//dynamically change procured data organization name
+$("#field-procured_data").change(
+    function(){
+        var selection = $(this).children("option:selected").val();
+        if (selection == "false") {
+                $("#field-procured_data_organization_name").val("N/A");
+                $('#field-procured_data_organization_name').attr('readonly', true);
+        } else {
+                $("#field-procured_data_organization_name").val("");
+                $('#field-procured_data_organization_name').attr('readonly', false);
+    }
+});
