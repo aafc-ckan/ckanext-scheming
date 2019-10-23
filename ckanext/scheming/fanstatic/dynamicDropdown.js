@@ -78,7 +78,11 @@ function buildChildrenDropdown( parent){
         })
 }
 
-
+//Ineligibility Reasons
+//hide N/A option initially when page renders
+$(function(){
+  $("select#field-ineligibility_reason option[value='na']").hide();
+});
 //dynamically change the ineligibility reasons
 $("select#field-elegible_for_release").change(function(){
     var currentSel = $(this).children("option:selected").val();
