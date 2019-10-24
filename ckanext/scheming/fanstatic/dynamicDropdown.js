@@ -10,14 +10,12 @@ var igl_reasons=[];
 var dic = {}
 $('ul.mdpd').each( 
     function(index) { 
-        console.log("index:" +index);
         var chidren = this.childNodes;
         var parent = this.id;
         dic[parent] = [];
         chidren.forEach ( function (data){
            var id = data.id;
            var label = data.innerText;
-           //dic[parent].push({"value":id,"lable":label});
 	   var newItem = {};
 	   newItem[id] = label;
            dic[parent].push(newItem);
@@ -103,7 +101,6 @@ $("select#field-elegible_for_release").change(function(){
                 $('<option></option>').val("na").html("N/A")
       );    	       
     }
-    //console.log(currentSel);
   }
 )
 
