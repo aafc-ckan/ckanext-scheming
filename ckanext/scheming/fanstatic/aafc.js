@@ -11,8 +11,6 @@ function getToday(){
 
 function switchToInternal(){
         $("#group-Open-Data-Release-Criteria").addClass("hidden");
-        $("input#field-jurisdiction").val("N/A");
-        $("input#field-access_restriction").val("N/A");
         $("select#field-access_to_information").val("false");
 	$("select#field-license_id").val("aafc-dsa");
 	$("#field-date_published").val("1970-01-01");
@@ -22,12 +20,10 @@ function switchToInternal(){
 
 function switchToOpenGovernment(){
         $("#group-Open-Data-Release-Criteria").removeClass("hidden");
-        $("input#field-jurisdiction").val("");
-        $("input#field-access_restriction").val("");
         $("select#field-access_to_information").val("");
-		$("select#field-license_id").val("");
-		$("select#field-license_id option[value='aafc-dsa']").hide();
-		$("#field-date_published").val(getToday());
+	$("select#field-license_id").val("");
+	$("select#field-license_id option[value='aafc-dsa']").hide();
+	$("#field-date_published").val(getToday());
         console.log("switched to open gov");
 }
 
@@ -48,7 +44,9 @@ $('#ctrl-Optional-Dataset-Information').addClass("collapsed");
 $('#ctrl-Optional-Inventory-Information').addClass("collapsed");
 
 var pub_type = $("#field-publication").val();
-if (pub_type == "open_government")
-   switchToOpenGovernment();
-else
-   switchToInternal();
+if (current.endsWith("new")){
+   if (pub_type == "open_government")
+      switchToOpenGovernment();
+   else
+      switchToInternal();
+}
