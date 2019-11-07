@@ -44,7 +44,8 @@ $('#ctrl-Optional-Dataset-Information').addClass("collapsed");
 $('#ctrl-Optional-Inventory-Information').addClass("collapsed");
 
 var pub_type = $("#field-publication").val();
-if (window.location.pathname.endsWith("new")){
+var current_path = window.location.pathname; 
+if (current_path.endsWith("new") || current_path.includes("/edit/")){
    if (pub_type == "open_government")
       switchToOpenGovernment();
    else
