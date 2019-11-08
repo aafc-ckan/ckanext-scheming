@@ -22,6 +22,13 @@
     might not be compatible with ckanext-scheming
     </p>
   {%- endif -%}
+    {% set lang  = request.environ.CKAN_LANG %}
+    <label class="control-label" style="margin-bottom:15px">
+	<span title="Required" class="control-required">*</span> 
+        {% if lang == "en" %} Mandatory
+        {% else %} Obligatoire
+	{% endif %}
+    </label>
     {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
     {%- for group in schema.dataset_fields|groupby('display_group') -%}
          {%- if schema.display_groups is defined -%}
