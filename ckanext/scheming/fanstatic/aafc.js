@@ -20,7 +20,7 @@ function switchToInternal(){
 
 function switchToOpenGovernment(){
         $("#group-Open-Data-Release-Criteria").removeClass("hidden");
-        $("select#field-access_to_information").val("");
+        $("select#field-access_to_information").val("false");
 	$("select#field-license_id").val("");
 	$("select#field-license_id option[value='aafc-dsa']").hide();
 	$("#field-date_published").val(getToday());
