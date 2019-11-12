@@ -23,7 +23,8 @@ function switchToOpenGovernment(){
         $("select#field-access_to_information").val("false");
 	$("select#field-license_id").val("");
 	$("select#field-license_id option[value='aafc-dsa']").hide();
-	$("#field-date_published").val(getToday());
+	//$("#field-date_published").val(getToday());
+	$("#field-date_published").val('mm/dd/yyyy');
         console.log("switched to open gov");
 }
 
