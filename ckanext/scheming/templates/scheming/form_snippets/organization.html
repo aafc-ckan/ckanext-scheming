@@ -1,6 +1,7 @@
 {# This is specific to datasets' owner_org field and won't work #}
 {# if used with other fields #}
 
+{% set current_lang = request.environ.CKAN_LANG %}
 
 {% macro organization_option_tag(organization, selected_org) %}
   {% block organization_option scoped %}
@@ -31,7 +32,15 @@
           <option value="{{ option[0] }}" {% if option[0] == data.private|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
           {% endfor %}
         </select>
-      </div>
+	  <div class="info-block">
+	    <i class="fa fa-info-circle"></i>
+		  {% if current_lang == "en" %}
+		    Indicates if the dataset is visible to only members of your Branch, or to all of AAFC. Draft datasets should be set to Branch only.
+          {% endif %}
+		  {% if current_lang == "fr" %}
+		    (To be translated) Indicates if the dataset is visible to only members of your Branch, or to all of AAFC. Draft datasets should be set to Branch only.
+		  {% endif %}
+	  </div>
     </div>
   {% endblock %}
 
