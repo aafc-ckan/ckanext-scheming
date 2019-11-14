@@ -1,4 +1,4 @@
-{% import 'macros/form.html' as form %}
+{% import 'scheming/form_snippets/form_alt.html' as form %}
 
 {%- set is_upload = (data.url_type == 'upload') -%}
 {{ form.image_upload(
@@ -12,7 +12,7 @@
     is_upload=is_upload,
     upload_label=h.scheming_language_text(field.upload_label),
     url_label=h.scheming_language_text(field.label),
-    placeholder=field.form_placeholder
+    placeholder=field.form_placeholder,
     )
 }}
 {# image_upload macro doesn't support call #}
