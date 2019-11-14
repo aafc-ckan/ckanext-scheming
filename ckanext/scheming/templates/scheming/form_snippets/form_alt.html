@@ -1,10 +1,7 @@
 {% import 'macros/form.html' as form_orig %}
   {#
+  Note: An alternative of the macro image_upload that put an required mark at dowload URL label.
   Builds a file upload for input
-
-  Example
-  {% import 'macros/form.html' as form %}
-  {{ form.image_upload(data, errors, is_upload_enabled=true) }}
 
   #}
 {% macro image_upload(data, errors, field_url='image_url', field_upload='image_upload', field_clear='clear_upload',
