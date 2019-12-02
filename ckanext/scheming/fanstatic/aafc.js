@@ -47,7 +47,7 @@ $('#ctrl-Optional-Inventory-Information').addClass("collapsed");
 var pub_type = $("#field-publication").val();
 var current_path = window.location.pathname; 
 //if (current_path.endsWith("new") || current_path.includes("/edit/")){
-if (current_path.indexOf("/new") != -1 || current_path.indexof("/edit/") != -1 ){
+if (current_path.indexOf("/new") != -1 || current_path.indexOf("/edit/") != -1 ){
    if (pub_type == "open_government")
       switchToOpenGovernment();
    else
