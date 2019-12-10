@@ -21,13 +21,13 @@ function switchToInternal(){
 function switchToOpenGovernment(){
         $("#group-Open-Data-Release-Criteria").removeClass("hidden");
         $("select#field-license_id option[value='aafc-dsa']").remove();
-		//Only apply placeholder values for new records
+        //Only apply placeholder values for new records
         if (current_path.indexOf("/new") != -1) {
             $("select#field-access_to_information").val("false");
             $("select#field-license_id").val("");
             //$("#field-date_published").val(getToday());
             $("#field-date_published").val('mm/dd/yyyy');
-		}
+        }
         console.log("switched to open gov");
 }
 
