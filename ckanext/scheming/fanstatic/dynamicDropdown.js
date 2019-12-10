@@ -13,6 +13,10 @@ $('ul.mdpd').each(
         var chidren = this.childNodes;
         var parent = this.id;
         dic[parent] = [];
+		//Condition for IE compatibility
+		if (window.NodeList && !NodeList.prototype.forEach){
+			NodeList.prototype.forEach = Array.prototype.forEach
+		}
         chidren.forEach ( function (data){
            var id = data.id;
            var label = data.innerText;
@@ -43,9 +47,9 @@ $("select#field-ineligibility_reason option").each(
 
 //initialize the child dropdown based on current UI is new dataset or edit dataset
 var current = window.location.pathname;
-if (current.endsWith("new")){
+if (current.indexOf("/new") != -1){
 	$('#field-drf_program_inventory').empty();
-} else if (current.startsWith('/dataset/edit/')){
+} else if (current.indexOf("/edit/") != -1){
 	var savedParentValue= $('#field-drf_core_responsibilities').val()
 	var savedChildValue = $('#field-drf_program_inventory').val()
 	$('#field-drf_program_inventory').empty();
