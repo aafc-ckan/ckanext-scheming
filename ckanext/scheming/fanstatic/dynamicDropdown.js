@@ -37,7 +37,7 @@ $("select#field-ineligibility_reason option").each(
 		var text = $(this).text();
 		if( val != '' && val != 'na')
 		{
-			item = {}
+			var item = {}
 			item[val] = text
 			igl_reasons.push(item);
 		}
@@ -83,7 +83,7 @@ function buildChildrenDropdown( parent){
 //Ineligibility Reasons
 //hide N/A option initially when page renders
 $(function(){
-  $("select#field-ineligibility_reason option[value='na']").hide();
+  $("select#field-ineligibility_reason option[value='na']").detach();
 });
 //dynamically change the ineligibility reasons
 $("select#field-elegible_for_release").change(function(){
