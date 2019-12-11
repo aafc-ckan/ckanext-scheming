@@ -82,8 +82,14 @@ function buildChildrenDropdown( parent){
 
 //Ineligibility Reasons
 //hide N/A option initially when page renders
+//if editing, and release eligibility is true, only display N/A option
 $(function(){
-  $("select#field-ineligibility_reason option[value='na']").detach();
+  var eligible_for_release = $("select#field-elegible_for_release");
+  if (eligible_for_release.val() == true) {
+    $("#field-ineligibility_reason").empty();
+    $("#field-ineligibility_reason").append($('<option></option>').val("na").html("N/A"));
+  } else {
+    $("select#field-ineligibility_reason option[value='na']").detach();
 });
 //dynamically change the ineligibility reasons
 $("select#field-elegible_for_release").change(function(){
