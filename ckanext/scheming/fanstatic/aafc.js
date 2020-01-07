@@ -26,7 +26,7 @@ function switchToOpenGovernment(){
             $("select#field-access_to_information").val("false");
             $("select#field-license_id").val("");
             //$("#field-date_published").val(getToday());
-            $("#field-date_published").val('mm/dd/yyyy');
+            $("#field-date_published").val('YYYY-MM-DD');
         }
         console.log("switched to open gov");
 }
