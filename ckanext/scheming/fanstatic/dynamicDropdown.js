@@ -13,6 +13,10 @@ $('ul.mdpd').each(
         var chidren = this.childNodes;
         var parent = this.id;
         dic[parent] = [];
+		//Condition for IE compatibility
+		if (window.NodeList && !NodeList.prototype.forEach){
+			NodeList.prototype.forEach = Array.prototype.forEach
+		}
         chidren.forEach ( function (data){
            var id = data.id;
            var label = data.innerText;
@@ -33,7 +37,7 @@ $("select#field-ineligibility_reason option").each(
 		var text = $(this).text();
 		if( val != '' && val != 'na')
 		{
-			item = {}
+			var item = {}
 			item[val] = text
 			igl_reasons.push(item);
 		}
@@ -43,9 +47,9 @@ $("select#field-ineligibility_reason option").each(
 
 //initialize the child dropdown based on current UI is new dataset or edit dataset
 var current = window.location.pathname;
-if (current.endsWith("new")){
+if (current.indexOf("/new") != -1){
 	$('#field-drf_program_inventory').empty();
-} else if (current.startsWith('/dataset/edit/')){
+} else if (current.indexOf("/edit/") != -1){
 	var savedParentValue= $('#field-drf_core_responsibilities').val()
 	var savedChildValue = $('#field-drf_program_inventory').val()
 	$('#field-drf_program_inventory').empty();
@@ -78,8 +82,15 @@ function buildChildrenDropdown( parent){
 
 //Ineligibility Reasons
 //hide N/A option initially when page renders
+//if editing, and release eligibility is true, only display N/A option
 $(function(){
-  $("select#field-ineligibility_reason option[value='na']").hide();
+  var eligible_for_release = $("select#field-elegible_for_release");
+  if (eligible_for_release.val() == "true") {
+    $("#field-ineligibility_reason").empty();
+    $("#field-ineligibility_reason").append($('<option></option>').val("na").html("N/A"));
+  } else {
+    $("select#field-ineligibility_reason option[value='na']").detach();
+  }
 });
 //dynamically change the ineligibility reasons
 $("select#field-elegible_for_release").change(function(){
