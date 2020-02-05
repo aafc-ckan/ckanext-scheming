@@ -14,6 +14,8 @@ function switchToInternal(){
         $("select#field-access_to_information").val("false");
 	$("select#field-license_id").val("aafc-dsa");
 	$("#field-date_published").val("1970-01-01");
+	if($("select#field-subject option[value='other']").length == 0)
+	    $("select#field-subject").append('<option id="field-subject-other" value="other">Other</option>')
 	$("#field-subject option[value='other']").prop("selected", true);
         console.log("switched to internal");
 }
@@ -28,6 +30,7 @@ function switchToOpenGovernment(){
             //$("#field-date_published").val(getToday());
             $("#field-date_published").val('YYYY-MM-DD');
         }
+        $("select#field-subject option[value='other']").remove(); 
         console.log("switched to open gov");
 }
 
