@@ -10,6 +10,7 @@ function getToday(){
 
 
 function switchToInternal(){
+	$("select#field-drf_core_responsibilities option[value='non_applicable']").remove();
         $("#group-Open-Data-Release-Criteria").addClass("hidden");
         $("select#field-access_to_information").val("false");
 	$("select#field-license_id").val("aafc-dsa");
@@ -21,6 +22,7 @@ function switchToInternal(){
 }
 
 function switchToOpenGovernment(){
+	$("select#field-drf_core_responsibilities option[value='non_applicable']").remove();
         $("#group-Open-Data-Release-Criteria").removeClass("hidden");
         $("select#field-license_id option[value='aafc-dsa']").remove();
         //Only apply placeholder values for new records
