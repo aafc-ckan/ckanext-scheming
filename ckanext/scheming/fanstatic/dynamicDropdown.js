@@ -53,6 +53,10 @@ if (current.indexOf("/new") != -1){
 	var savedParentValue= $('#field-drf_core_responsibilities').val()
 	var savedChildValue = $('#field-drf_program_inventory').val()
 	$('#field-drf_program_inventory').empty();
+	// don't initially attempt to build child dropdown for N/A parent values
+	if (savedParentValue != ""){
+	    buildChildrenDropdown(savedParentValue);
+	}
 	buildChildrenDropdown(savedParentValue);
 	$('#field-drf_program_inventory').val(savedChildValue)
     console.log("Edit!:" + current );
