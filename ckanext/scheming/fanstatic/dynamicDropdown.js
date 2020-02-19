@@ -57,7 +57,6 @@ if (current.indexOf("/new") != -1){
 	if (savedParentValue != ""){
 	    buildChildrenDropdown(savedParentValue);
 	}
-	buildChildrenDropdown(savedParentValue);
 	$('#field-drf_program_inventory').val(savedChildValue)
     console.log("Edit!:" + current );
     console.log("Edit,saved child:" + savedChildValue + ",parent:"+ savedParentValue);
